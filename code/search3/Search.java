@@ -69,6 +69,7 @@ public abstract class Search {
 
     for (SearchNode snode : successorNodes) {
       snode.setGlobalCost(currentNode.getGlobalCost() + snode.getLocalCost());
+      //System.out.println("Setting " + snode.toString() + " parent to: " + currentNode.toString());
       snode.setParent(currentNode);
     }
 

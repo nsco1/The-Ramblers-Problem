@@ -28,4 +28,8 @@ public class Coords {
     return y;
   };
 
+  public String toString() {
+    return "(" + y + ", " + x + ")";
+  }
+
 }
