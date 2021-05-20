@@ -11,10 +11,10 @@ public class RamblersState extends SearchState{
 
     //constructor
     //A* - has estRemCost now
-    public RamblersState(Coords coord, int lc){
+    public RamblersState(Coords coord, int lc, int rc){
         coords=coord;
         localCost=lc;
-        //estRemCost=rc;
+        estRemCost=rc;
     }
     //accessors
     public Coords getCoords(){
@@ -35,6 +35,7 @@ public class RamblersState extends SearchState{
         RamblersSearch rsearcher = (RamblersSearch) searcher;
         TerrainMap tMap = rsearcher.getMap();
         int[][] map = rsearcher.getMap().getTmap();
+        Coords goal = rsearcher.getGoal();
         // ArrayList<MapLink> links = map.getLinks(coords);
         ArrayList<SearchState> succs = new ArrayList();
 
@@ -54,15 +55,25 @@ public class RamblersState extends SearchState{
                 }
             }
         }; 
-        
+      
         // loop over the possible moves
         for (Coords l: links){
             // Local Cost
             int height = map[coords.gety()][coords.getx()];
             int sHeight = map[l.gety()][l.getx()];
             int cost = sHeight <= height ? 1 : 1 + Math.abs(sHeight - height);
-
-            succs.add(new RamblersState(l, cost));
+            
+            // A* Calculations
+            double deltaX = Math.abs(l.getx() - goal.getx());
+            double deltaY = Math.abs(l.gety() - goal.gety());
+            double deltaH = Math.abs(map[l.gety()][l.getx()] - map[goal.gety()][goal.getx()]);
+            double estRemCostMan = deltaX + deltaY + deltaH; // Manhattan
+            // double estRemCostEuc = Math.sqrt(deltaX*deltaX + deltaY*deltaY + deltaH*deltaH); // Euclidean
+            // double noDiagSteps = Math.min(deltaX, Math.min(deltaY, deltaH));
+            // double noStrtSteps = estRemCostMan - 2*noDiagSteps;
+            // double estRemCost = noStrtSteps + Math.sqrt(3) * noDiagSteps;
+            
+            succs.add(new RamblersState(l, cost, (int)(cost * estRemCostMan)));
         }
         return succs;
     }
