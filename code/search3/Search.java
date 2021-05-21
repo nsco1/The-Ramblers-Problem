@@ -58,6 +58,42 @@ public abstract class Search {
 
   }
 
+  /**
+  * runSearchE
+  * runSearch without printout
+  * returns efficiency - 0 for failure
+  * @param initState initial state
+  * @param strat - String specifying strategy
+  * @return indication of success or failure
+  */
+
+  public  float runSearchE (SearchState initState, String strat) {
+
+    initNode = new SearchNode(initState,0); // create initial node
+    initNode.setGlobalCost(0); //change from search2
+
+  	open = new ArrayList<SearchNode>(); // initial open, closed
+  	open.add(initNode);
+	  closed = new ArrayList<SearchNode>();
+
+  	int numIteration = 1;
+
+	  while (!open.isEmpty()) {
+
+	    selectNode(strat); // change from search1 -selectNode selects next node given strategy,
+
+	    if (currentNode.goalPredicate(this)) return reportSuccessE();  //success
+	    //change from search1 - call reportSuccess
+
+	    expand(); // go again
+	    closed.add(currentNode); // put current node on closed
+	    numIteration = numIteration + 1;
+    }
+    
+	return 0;  // out of the while loop - failure
+	}
+
+
   // expand current node
   private void expand() {
 
@@ -185,5 +221,19 @@ public abstract class Search {
     System.out.println("Efficiency " + ((float) plen / (closed.size() + 1)));
     System.out.println("Solution Path\n");
     return buf.toString();
+  }
+  
+  // reportSuccess for runSearcE
+    private float reportSuccessE(){
+
+    	SearchNode n = currentNode;
+	    int plen=1;
+
+    	while (n.getParent() != null){
+	      n=n.getParent();
+	      plen=plen+1;
+      }
+
+  	return (float) plen/(closed.size()+1);
   }
 }

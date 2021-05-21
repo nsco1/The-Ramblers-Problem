@@ -28,26 +28,28 @@ public class RunRamblersAstart {
     //String res_bb = searcher.runSearch(initState, "AStar");
     //System.out.println(res_bb);
 
-    ArrayList<Coords> starts = new ArrayList<Coords>(); 
-    for (int i = 0; i < 50; i++) {
-      int randomX = (int) (Math.random() * tm.getWidth());
-      int randomY = (int) (Math.random() * tm.getDepth());
-      starts.add(new Coords(randomX, randomY));
-    }
+    // Random coord generation
+    // ArrayList<Coords> starts = new ArrayList<Coords>(); 
+    // for (int i = 0; i < 50; i++) {
+    //   int randomX = (int) (Math.random() * tm.getWidth());
+    //   int randomY = (int) (Math.random() * tm.getDepth());
+    //   starts.add(new Coords(randomX, randomY));
+    // }
 
-    ArrayList<Coords> goals = new ArrayList<Coords>(); 
-    for (int i = 0; i < 50; i++) {
-      int randomX = (int) (Math.random() * tm.getWidth());
-      int randomY = (int) (Math.random() * tm.getDepth());
-      goals.add(new Coords(randomX, randomY));
-    }
-  
+    // ArrayList<Coords> goals = new ArrayList<Coords>(); 
+    // for (int i = 0; i < 50; i++) {
+    //   int randomX = (int) (Math.random() * tm.getWidth());
+    //   int randomY = (int) (Math.random() * tm.getDepth());
+    //   goals.add(new Coords(randomX, randomY));
+    // }
+
     Coords[][] startsAndGoals = new Coords[50][2];
-    for (int i = 0; i < 50; i++) {
-      for (int j = 0; j < 2; j++) {
-        startsAndGoals[i][j] = j % 2 == 0 ? starts.get(i) : goals.get(i);
-      }
-    }
+    // for (int i = 0; i < 50; i++) {
+    //   for (int j = 0; j < 2; j++) {
+    //     startsAndGoals[i][j] = j % 2 == 0 ? starts.get(i) : goals.get(i);
+    //   }
+    // }
+
     startsAndGoals = readstartsAndGoals("coords.txt");
     //writestartsAndGoals("coords.txt", startsAndGoals);
 

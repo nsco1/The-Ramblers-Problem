@@ -14,7 +14,7 @@ public class RunRamblersBB {
 
   public static void main(String[] arg) throws java.io.IOException {
 
-    TerrainMap tm = new TerrainMap("diablo.pgm"); //map we're searching
+    TerrainMap tm = new TerrainMap("tmc.pgm"); //map we're searching
     // Coords goal = new Coords(1, 3);
 
     // RamblersSearch searcher = new RamblersSearch(tm, goal);
@@ -29,7 +29,7 @@ public class RunRamblersBB {
     //String res_bb = searcher.runSearch(initState, "branchAndBound");
     //System.out.println(res_bb);
     Coords[][] startsAndGoals = new Coords[50][2];
-    startsAndGoals = readstartsAndGoals("coords.txt");
+    startsAndGoals = readstartsAndGoals("coords16.txt");
   
 
     ArrayList<Float> effciency = new ArrayList<Float>(); 
